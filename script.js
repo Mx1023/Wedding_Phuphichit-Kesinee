@@ -1,5 +1,5 @@
 // 🔧 แก้วันที่งานตรงนี้
-const weddingDate = new Date("2026-10-23T08:00:00").getTime();
+const weddingDate = new Date("2026-11-20T08:00:00").getTime();
 
 function updateCountdown() {
   const now = new Date().getTime();
