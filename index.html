@@ -1,55 +1,79 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Online Invitation Card</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Invitation</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Prompt:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 <body>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <h1>You are cordially invited to our wedding.</h1>
-    <h2>Phuphichit & Kesinee</h2>
-    <p>20 November 2026</p>
-  </section>
+<!-- ================= COVER ================= -->
+<div class="cover" id="cover">
+  <div class="cover-content">
+    <h1>Phuphichit & Kesinee</h1>
+    <p>We are getting married</p>
+    <button onclick="openInvitation()">Open Invitation</button>
+  </div>
+</div>
 
-  <!-- COUNTDOWN -->
-  <section class="countdown">
-    <h3>Countdown to Wedding day</h3>
-    <div id="timer">
-      <div><span id="days">0</span><small>Days</small></div>
-      <div><span id="hours">0</span><small>Hours</small></div>
-      <div><span id="minutes">0</span><small>Minutes</small></div>
-      <div><span id="seconds">0</span><small>Seconds</small></div>
-    </div>
-  </section>
+    <!-- MAIN CONTENT -->
+    <div id="mainContent">
+      <!-- Hero -->
+      <section class="hero">
+        <div class="overlay">
+          <h2>You are invited to our wedding</h2>
+          <h1>Phuphichit & Kesinee</h1>
+          <p>20 November 2026</p>
+        </div>
+      </section>
 
-  <!-- EVENT DETAIL -->
-  <section class="detail">
-    <h3>Wedding Ceremony</h3>
-    <p>
-      ณ หอประชุมที่ว่าการ อำเภอ เสิงสาง<br>
-      วันที่ 20 พฤศจิกายน 2026 เวลา 08:00 น.
-    </p>
-  </section>
+    <!-- ================= COUNTDOWN ================= -->
+    <section class="countdown fade-in">
+      <h3>Countdown to Our Special Day</h3>
+      <div id="timer">
+        <div><span id="days">0</span><small> Days</small></div>
+        <div><span id="hours">0</span><small> Hours</small></div>
+        <div><span id="minutes">0</span><small> Minutes</small></div>
+        <div><span id="seconds">0</span><small> Seconds</small></div>
+      </div>
+    </section>
 
-  <!-- RSVP -->
-  <section class="rsvp">
-    <h3>RSVP</h3>
-    <form id="rsvpForm">
-      <input type="text" placeholder="ชื่อของคุณ" required />
-      <textarea placeholder="คำอวยพร / ข้อความถึงบ่าวสาว"></textarea>
-      <button type="submit">ส่งคำตอบ</button>
-    </form>
-  </section>
+    <!-- ================= DETAIL ================= -->
+    <section class="detail fade-in">
+      <h3>Wedding Ceremony</h3>
+      <p>
+        ณ หอประชุมที่ว่าการอำเภอเสิงสาง<br>
+        วันที่ 20 พฤศจิกายน 2026 เวลา 08:00 น.
+      </p>
+    </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>With Love ❤️</p>
-  </footer>
+    <!-- ================= RSVP ================= -->
+    <section class="rsvp fade-in">
+      <h3>Send Your Wishes</h3>
+      <form id="rsvpForm">
+        <input type="text" placeholder="ชื่อของคุณ" required>
+        <textarea placeholder="คำอวยพร"></textarea>
+        <button type="submit">ส่งคำอวยพร</button>
+      </form>
+      <div id="messagesList"></div>
+    </section>
 
-  <script src="script.js"></script>
+</div>
+
+    <!-- ================= MUSIC ================= -->
+        <audio id="bgMusic" loop>
+          <source src="music/music1.mp3" type="audio/mpeg">
+        </audio>
+
+        <button id="musicBtn" class="music-btn" >
+          <i class="fa-solid fa-music"></i>
+        </button>
+
+<script src="script.js"></script>
 </body>
 </html>

@@ -1,29 +1,122 @@
-// 🔧 แก้วันที่งานตรงนี้
-const weddingDate = new Date("2026-11-20T08:00:00").getTime();
+document.addEventListener("DOMContentLoaded", function () {
 
-function updateCountdown() {
-  const now = new Date().getTime();
-  const diff = weddingDate - now;
+  // ================= MUSIC SYSTEM =================
+  const music = document.getElementById("bgMusic");
+  const musicBtn = document.getElementById("musicBtn");
+  const musicIcon = musicBtn ? musicBtn.querySelector("i") : null;
 
-  if (diff < 0) return;
+  function openInvitation() {
+  const cover = document.getElementById("cover");
+  const mainContent = document.getElementById("mainContent");
 
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((diff / (1000 * 60)) % 60);
-  const seconds = Math.floor((diff / 1000) % 60);
+  if (cover) cover.classList.add("fade-out");
+  if (mainContent) mainContent.classList.add("show");
 
-  document.getElementById("days").textContent = days;
-  document.getElementById("hours").textContent = hours;
-  document.getElementById("minutes").textContent = minutes;
-  document.getElementById("seconds").textContent = seconds;
+  if (music) {
+    music.play().catch(() => {});
+  }
+
+  if (musicBtn) {
+    musicBtn.classList.add("playing");
+  }
 }
 
-setInterval(updateCountdown, 1000);
-updateCountdown();
+  // สำคัญมาก (ให้ onclick เรียกได้)
+  window.openInvitation = openInvitation;
 
-// RSVP (ตอนนี้ยังไม่ส่งไป backend)
-document.getElementById("rsvpForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-  alert("ขอบคุณสำหรับการตอบรับ ❤️");
-  this.reset();
+  if (musicBtn && music) {
+    musicBtn.addEventListener("click", function () {
+      if (music.paused) {
+        music.play();
+        musicBtn.classList.add("playing");
+        if (musicIcon) {
+          musicIcon.classList.remove("fa-volume-xmark");
+          musicIcon.classList.add("fa-music");
+        }
+      } else {
+        music.pause();
+        musicBtn.classList.remove("playing");
+        if (musicIcon) {
+          musicIcon.classList.remove("fa-music");
+          musicIcon.classList.add("fa-volume-xmark");
+        }
+      }
+    });
+  }
+
+  // ================= COUNTDOWN =================
+  const weddingDate = new Date("2026-11-20T08:00:00").getTime();
+
+  setInterval(() => {
+    const now = new Date().getTime();
+    const diff = weddingDate - now;
+
+    if (diff <= 0) return;
+
+    const days = document.getElementById("days");
+    const hours = document.getElementById("hours");
+    const minutes = document.getElementById("minutes");
+    const seconds = document.getElementById("seconds");
+
+    if (days) days.textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
+    if (hours) hours.textContent = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    if (minutes) minutes.textContent = Math.floor((diff / (1000 * 60)) % 60);
+    if (seconds) seconds.textContent = Math.floor((diff / 1000) % 60);
+
+  }, 1000);
+
+  // ================= SCROLL FADE EFFECT =================
+  const faders = document.querySelectorAll('.fade-in');
+
+  window.addEventListener('scroll', () => {
+    faders.forEach(el => {
+      const top = el.getBoundingClientRect().top;
+      if (top < window.innerHeight - 100) {
+        el.classList.add('show');
+      }
+    });
+  });
+
+  // ================= RSVP SYSTEM =================
+  const form = document.getElementById("rsvpForm");
+  const messagesList = document.getElementById("messagesList");
+
+  if (form && messagesList) {
+
+    let messages = JSON.parse(localStorage.getItem("weddingMessages")) || [];
+
+    function renderMessages() {
+      messagesList.innerHTML = "";
+
+      messages.forEach(msg => {
+        const card = document.createElement("div");
+        card.classList.add("message-card");
+        card.innerHTML = `
+          <strong>${msg.name}</strong>
+          <p>${msg.text}</p>
+        `;
+        messagesList.appendChild(card);
+      });
+    }
+
+    renderMessages();
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = form.querySelector("input").value.trim();
+      const text = form.querySelector("textarea").value.trim();
+
+      if (!name) return;
+
+      const newMessage = { name, text };
+      messages.unshift(newMessage);
+
+      localStorage.setItem("weddingMessages", JSON.stringify(messages));
+
+      renderMessages();
+      form.reset();
+    });
+  }
+
 });
