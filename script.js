@@ -5,6 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const musicBtn = document.getElementById("musicBtn");
   const musicIcon = musicBtn ? musicBtn.querySelector("i") : null;
 
+    if (music) {
+    music.volume = 0.125;
+  }
+
   function openInvitation() {
   const cover = document.getElementById("cover");
   const mainContent = document.getElementById("mainContent");

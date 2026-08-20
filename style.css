@@ -70,6 +70,7 @@ body {
 
 /* ซ่อนก่อน */
 #mainContent {
+  background: rgba(255, 255, 255, 0.85);
   opacity: 0;
   transform: scale(1.05);
   transition: 1.2s ease;
@@ -93,9 +94,11 @@ body {
 }
 
 .overlay {
-  background: rgba(255,255,255,0.85);
-  padding: 60px;
-  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 100px;
+  border-radius: 50px;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero h1 {
@@ -106,6 +109,11 @@ body {
 /* ================= SECTION ================= */
 section {
   padding: 80px 20px;
+}
+
+#countdownbg {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 100px;
 }
 
 #timer {
@@ -119,7 +127,7 @@ section {
   background: #fff;
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
 /* ================= RSVP ================= */
